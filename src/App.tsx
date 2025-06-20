@@ -9,7 +9,8 @@ import {Routes, Route} from "react-router-dom"
 import { ProSidebarProvider } from 'react-pro-sidebar'
 import Team from "./scenes/team"
 import Contacts from "./scenes/contacts"
-
+import Invoice from "./scenes/invoices"
+import Form from "./scenes/form"
 
 
 
@@ -30,7 +31,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/team" element={<Team/>} />
-             <Route path="/contacts" element={<Contacts/>} /> 
+             <Route path="/contacts" element={<Contacts/>} />
+              <Route path="/invoices" element={<Invoice/>} />
+              <Route path="/forms" element={<Form/>} />
             
 
 

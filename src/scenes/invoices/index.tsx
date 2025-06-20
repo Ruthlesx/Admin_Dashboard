@@ -1,11 +1,10 @@
 import {type FC} from 'react';
-import { Box,}  from "@mui/material";
-import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import { Box, Typography, useTheme}  from "@mui/material";
+import { DataGrid, type GridColDef, type GridRenderCellParams  } from "@mui/x-data-grid";
 import { tokens } from '../../theme'
-import { mockDataContacts } from "../../data/mockData"
+import { mockDataInvoices } from "../../data/mockData"
 
 import Header from "../../components/Header"
-import {useTheme} from "@mui/material"
 import { GridToolbar } from '@mui/x-data-grid/internals';
 
 
@@ -14,21 +13,18 @@ import { GridToolbar } from '@mui/x-data-grid/internals';
 
  
 
-    interface Contact {
+    interface Invoice {
         id: number;
         name: string;
-        age: number;
         phone: string;
         email: string;
-        registrarId: number;
-        address: string;
-        city: string;
-        zipCode: string;
+       date: Date;
+       cost: number;
         
     }
 
 
-const Contact: FC = () => {
+const Invoice: FC = () => {
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -36,13 +32,12 @@ const Contact: FC = () => {
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", flex: 0.5},
         { field: "name", headerName: "Name", flex: 1, cellClassName: "name-column--cell"},
-        { field: "age", headerName: "Age", type: "number", headerAlign: "left", align: "left"},
         { field: "phone", headerName: "Phone Number", flex: 1 },
         { field: "email", headerName: "Email", flex: 1 },
-        {field: "registrarId", headerName: "Registrar ID"},
-        {field: "address", headerName:"Address", flex: 1},
-         {field: "city", headerName:"City", flex: 1},
-          {field: "zipCode", headerName:"Zipcode", flex: 1},
+        { field: "cost", headerName: "Cost", flex: 1,  renderCell: (params:  GridRenderCellParams ) => (
+            <Typography color={colors.greenAccent[500]}>${params.row.cost}</Typography>
+        ) },
+        { field: "date", headerName: "Date", flex: 1 },
        
 
     ]
@@ -50,7 +45,8 @@ const Contact: FC = () => {
   return (
     <Box m="20px">
 
-             <Header title="Contacts" subtitle="List of Contacts for future reference"/>
+             <Header title="Invoices" subtitle="Customer Invoices Stored here"/>
+
 
              <Box m="40px 0 0 0"
                 height="75vh"
@@ -67,19 +63,21 @@ const Contact: FC = () => {
                     },
                     "& .MuiDataGrid-columnHeaders" : {
                         backgroundColor: colors.blueAccent[700],
-                        borderBottom: " none"
+                        borderBottom: "none"
                     },
                     "& .MuiDataGrid-footerContainer" : {
                         borderTop: "none",
                         backgroundColor:colors.blueAccent[700]
                     },
-                    "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-                        color: `${colors.grey[100]} !important`,
+                    "& .MuiCheckbox-root": {
+                        color: `${colors.greenAccent[200]} !important`
                     }
                 }}
              >
                 <DataGrid 
-                    rows={mockDataContacts} columns={columns} 
+
+                    checkboxSelection
+                    rows={mockDataInvoices} columns={columns} 
                     slots={{ toolbar: GridToolbar}}
                 />
              </Box>
@@ -89,4 +87,4 @@ const Contact: FC = () => {
   )
 }
 
-export default Contact
+export default Invoice
