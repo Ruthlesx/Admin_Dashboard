@@ -11,7 +11,9 @@ import Team from "./scenes/team"
 import Contacts from "./scenes/contacts"
 import Invoice from "./scenes/invoices"
 import Form from "./scenes/form"
-
+import Calendar from './scenes/calendar'
+import Faq from './scenes/faq'
+import Bar from './scenes/bar'
 
 
 function App() {
@@ -33,8 +35,10 @@ function App() {
               <Route path="/team" element={<Team/>} />
              <Route path="/contacts" element={<Contacts/>} />
               <Route path="/invoices" element={<Invoice/>} />
-              <Route path="/forms" element={<Form/>} />
-            
+              <Route path="/forms" element={<Form/>} />\
+              <Route path="/calendar" element={<Calendar/>} />
+              <Route path="/faq" element={<Faq/>} />
+              <Route path="/bar" element={<Bar/>} />     
 
 
             </Routes>

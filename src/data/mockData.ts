@@ -40,13 +40,19 @@ export interface Transaction {
 export interface BarDataItem {
   country: string;
   "hot dog": number;
-  "hot dogColor": string;
   burger: number;
-  burgerColor: string;
-  kebab: number;
-  kebabColor: string;
+  kebab: number; 
   donut: number;
-  donutColor: string;
+
+
+  "hot dogColor": string;
+   burgerColor: string;
+   kebabColor: string;
+   donutColor: string;
+
+
+   [key: string]: string | number;
+  
 }
 
 export interface PieDataItem {
