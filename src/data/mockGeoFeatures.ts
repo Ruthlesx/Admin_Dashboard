@@ -1,3 +1,75 @@
+
+/**
+ * Represents a single coordinate pair [longitude, latitude].
+ */
+export type GeoCoordinate = [number, number];
+
+/**
+ * Defines the structure for Polygon geometry coordinates.
+ * A Polygon is an array of linear rings, where each linear ring is an array of coordinates.
+ */
+export type PolygonCoordinates = GeoCoordinate[][];
+
+/**
+ * Defines the structure for MultiPolygon geometry coordinates.
+ * A MultiPolygon is an array of Polygons.
+ */
+export type MultiPolygonCoordinates = PolygonCoordinates[];
+
+/**
+ * Represents the base structure for any GeoJSON Geometry object.
+ */
+export interface GeoGeometry {
+  type: "Point" | "LineString" | "Polygon" | "MultiPoint" | "MultiLineString" | "MultiPolygon";
+  coordinates: GeoCoordinate | GeoCoordinate[] | PolygonCoordinates | MultiPolygonCoordinates;
+}
+
+/**
+ * Represents a Polygon geometry.
+ */
+export interface PolygonGeometry extends GeoGeometry {
+  type: "Polygon";
+  coordinates: PolygonCoordinates;
+}
+
+/**
+ * Represents a MultiPolygon geometry.
+ */
+export interface MultiPolygonGeometry extends GeoGeometry {
+  type: "MultiPolygon";
+  coordinates: MultiPolygonCoordinates;
+}
+
+/**
+ * Represents the properties of a GeoJSON Feature.
+ */
+export interface GeoFeatureProperties {
+  name: string;
+  [key: string]: any; // Allow for other properties not explicitly defined
+}
+
+/**
+ * Represents a single GeoJSON Feature.
+ */
+export interface GeoFeature {
+  type: "Feature";
+  properties: GeoFeatureProperties;
+  geometry: PolygonGeometry | MultiPolygonGeometry; // Can be extended to other geometry types
+  id?: string | number; // GeoJSON features can have an optional id
+}
+
+/**
+ * Represents a GeoJSON FeatureCollection, which is a collection of features.
+ */
+export interface GeoFeatureCollection {
+  type: "FeatureCollection";
+  features: GeoFeature[];
+}
+
+
+
+
+
 export const geoFeatures = {
   type: "FeatureCollection",
   features: [
